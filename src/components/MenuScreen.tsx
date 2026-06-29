@@ -13,6 +13,9 @@ interface MenuScreenProps {
   onAddToCart: (item: MenuItem) => void;
   onUpdateQuantity: (menuItemId: string, change: number) => void;
   onNavigateToCart: () => void;
+  menuItems?: MenuItem[];
+  tenantName?: string;
+  tableNumber?: string;
 }
 
 export default function MenuScreen({
@@ -20,15 +23,20 @@ export default function MenuScreen({
   onAddToCart,
   onUpdateQuantity,
   onNavigateToCart,
+  menuItems,
+  tenantName,
+  tableNumber,
 }: MenuScreenProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
   const categories = ["All", "Trending", "Starters", "Mains", "Desserts", "Beverages"];
 
+  const catalog = menuItems || MENU_ITEMS;
+
   // Filter items
   const filteredItems = useMemo(() => {
-    return MENU_ITEMS.filter((item) => {
+    return catalog.filter((item) => {
       const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.description.toLowerCase().includes(searchQuery.toLowerCase());
       
@@ -40,7 +48,7 @@ export default function MenuScreen({
         return matchesSearch && item.category === activeCategory;
       }
     });
-  }, [searchQuery, activeCategory]);
+  }, [catalog, searchQuery, activeCategory]);
 
   // Compute stats for bottom floating cart bar
   const cartItemCount = useMemo(() => {
@@ -65,13 +73,13 @@ export default function MenuScreen({
         <div className="flex items-center gap-3">
           <span className="material-symbols-outlined text-primary cursor-pointer active:scale-95 transition-transform" style={{ fontSize: "24px" }}>menu</span>
           <div className="flex flex-col">
-            <h1 className="font-display text-xl text-primary tracking-tighter leading-none">BiteFlow</h1>
-            <span className="text-[9px] font-mono text-on-surface-variant uppercase tracking-widest mt-0.5">Table 4 • QR #T04</span>
+            <h1 className="font-display text-xl text-primary tracking-tighter leading-none">{tenantName || "BiteFlow"}</h1>
+            <span className="text-[9px] font-mono text-on-surface-variant uppercase tracking-widest mt-0.5">{tableNumber || "Table 4"} • QR #T04</span>
           </div>
         </div>
         <div className="flex items-center gap-3">
           <div className="bg-surface-container-high px-3 py-1 rounded-full border border-outline-variant/50">
-            <span className="text-[10px] font-sans font-bold tracking-widest text-primary">TABLE 4</span>
+            <span className="text-[10px] font-sans font-bold tracking-widest text-primary uppercase">{tableNumber || "TABLE 4"}</span>
           </div>
           <div className="w-10 h-10 rounded-full border-2 border-primary overflow-hidden">
             <img
@@ -91,7 +99,7 @@ export default function MenuScreen({
           <div className="relative z-10">
             <p className="text-[10px] font-sans font-extrabold text-white/80 uppercase tracking-widest mb-1">Evening Special</p>
             <h2 className="font-display text-2xl font-black text-white leading-none">Craving Spices?</h2>
-            <p className="text-xs text-white/95 mt-1.5 leading-relaxed font-sans font-medium">Authentic flavors delivered to Table 4 in under 15 mins.</p>
+            <p className="text-xs text-white/95 mt-1.5 leading-relaxed font-sans font-medium">Authentic flavors delivered to {tableNumber || "Table 4"} in under 15 mins.</p>
           </div>
         </div>
 

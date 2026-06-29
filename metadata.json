@@ -1,6 +1,6 @@
 {
   "name": "BiteFlow",
-  "description": "A smart digital dining menu, ordering assistant, and integrated kitchen display system (KDS) for premium hospitality.",
+  "description": "An enterprise-grade Multi-Tenant SaaS Café Management Platform with isolated databases, live analytics, visual theme builders, team scheduling, and interactive store QR codes.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

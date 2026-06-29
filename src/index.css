@@ -1,21 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Syne:wght@700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 @import "tailwindcss";
 
+:root {
+  --primary: #ff6b35;
+  --secondary: #f7b05b;
+  --accent: #10b981;
+  --border-radius: 16px;
+  --font-family: 'Inter';
+}
+
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Syne", sans-serif;
+  --font-sans: var(--font-family), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-family), "Syne", sans-serif;
   --font-mono: "Space Grotesk", monospace;
 
-  --color-primary: #ffb59d;
-  --color-on-primary: #5d1900;
-  --color-primary-container: #ff6b35;
-  --color-on-primary-container: #5f1900;
-  --color-secondary: #ddb7ff;
-  --color-secondary-container: #6f00be;
-  --color-on-secondary-container: #d6a9ff;
-  --color-tertiary: #00e29e;
-  --color-tertiary-container: #00af79;
-  --color-on-tertiary-container: #003a25;
+  --color-primary: var(--primary);
+  --color-on-primary: #ffffff;
+  --color-primary-container: var(--primary);
+  --color-on-primary-container: #ffffff;
+  --color-secondary: var(--secondary);
+  --color-secondary-container: var(--secondary);
+  --color-on-secondary-container: #ffffff;
+  --color-tertiary: var(--accent);
+  --color-tertiary-container: var(--accent);
+  --color-on-tertiary-container: #ffffff;
   --color-error: #ffb4ab;
   --color-error-container: #93000a;
   

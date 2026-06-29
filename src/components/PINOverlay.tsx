@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { Lock, Check } from "lucide-react";
 
 interface PINOverlayProps {
-  onSuccess: () => void;
+  onSuccess: (role: string) => void;
   onClose?: () => void;
 }
 
@@ -20,9 +20,24 @@ export default function PINOverlay({ onSuccess, onClose }: PINOverlayProps) {
     if (num === "X") {
       setPin("");
     } else if (num === "OK") {
-      // Default pin is 1234, but we can accept any 4 digit code for smooth testing
       if (pin.length === 4) {
-        onSuccess();
+        // Map PINs to specific Smart Café user roles
+        let detectedRole = "Chef";
+        if (pin === "8888") {
+          detectedRole = "Admin";
+        } else if (pin === "5555") {
+          detectedRole = "Manager";
+        } else if (pin === "3333") {
+          detectedRole = "Waiter";
+        } else if (pin === "2222") {
+          detectedRole = "Cashier";
+        } else if (pin === "1111") {
+          detectedRole = "Chef";
+        } else {
+          // Default fallback
+          detectedRole = "Chef";
+        }
+        onSuccess(detectedRole);
       } else {
         setError("Please enter a 4-digit code");
       }
@@ -49,11 +64,11 @@ export default function PINOverlay({ onSuccess, onClose }: PINOverlayProps) {
           <span className="material-symbols-outlined text-primary text-5xl" style={{ fontSize: "48px" }}>lock</span>
         </div>
         
-        <h2 className="font-display text-2xl font-bold text-primary mb-2">Staff access only 🔐</h2>
-        <p className="font-sans text-sm text-on-surface-variant mb-6">Enter secure kitchen code to continue</p>
+        <h2 className="font-display text-2xl font-bold text-primary mb-2">Smart Café Terminal 🔐</h2>
+        <p className="font-sans text-xs text-on-surface-variant mb-6">Enter role-specific PIN code to log in</p>
         
         {/* Pin Dots */}
-        <div className="flex justify-center gap-4 mb-8">
+        <div className="flex justify-center gap-4 mb-6">
           {[0, 1, 2, 3].map((index) => (
             <div
               key={index}
@@ -93,9 +108,16 @@ export default function PINOverlay({ onSuccess, onClose }: PINOverlayProps) {
           })}
         </div>
 
-        <p className="mt-6 text-[11px] text-on-surface-variant/50">
-          Hint: Enter any 4 numbers and click OK
-        </p>
+        <div className="mt-6 p-4 bg-surface-container rounded-2xl border border-outline-variant/10 text-left w-full space-y-1">
+          <span className="text-[10px] font-bold text-primary uppercase font-mono tracking-widest block mb-1">Terminal Shortcuts:</span>
+          <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 text-[10px] text-on-surface-variant font-mono">
+            <span>• Chef/KDS: <b>1111</b></span>
+            <span>• Cashier: <b>2222</b></span>
+            <span>• Waiter: <b>3333</b></span>
+            <span>• Manager: <b>5555</b></span>
+            <span>• Admin: <b>8888</b></span>
+          </div>
+        </div>
       </div>
     </div>
   );
