@@ -1,0 +1,6 @@
+{
+  "name": "BiteFlow",
+  "description": "A smart digital dining menu, ordering assistant, and integrated kitchen display system (KDS) for premium hospitality.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
